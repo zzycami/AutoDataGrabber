@@ -20,6 +20,7 @@ class baozoumanhua(HTMLParser):
         pass
 
     def fetchItems(self, page = 1):
+        print "baozoumanhua"
         self.html = HTMLParser.fetchPage(self, "%s%d"%(URL, page))
         self.soup = BeautifulSoup(self.html, from_encoding=ENCODING)
         

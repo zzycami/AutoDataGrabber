@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from database import database
 
 """
@@ -32,7 +33,7 @@ class LogicTopic(database):
         bangTopic = {}
         bangTopic["bang_id"] = bangId
         bangTopic["topic_id"] = topicId
-        database.create(self, self.bangTopicTable, bangTopic)
+        return database.create(self, self.bangTopicTable, bangTopic)
     
     # add a new topic
     def addTopic(self, title, description, logo):
@@ -41,12 +42,12 @@ class LogicTopic(database):
         topic["description"] = description
         topic["logo"] = logo
         topic["fans"] = 0
-        database.create(self, topic)
+        return database.create(self, self.topicTable, topic)
     
     # add serieous of topic
     def addBangTopicArray(self, bangId, topicNameArray):
         for topic in topicNameArray:
-            topicId = topic.get("title")
+            topicId = self.getTopicByTitle(topic)
             if topicId != False:
                 # if this topic exist, link to the this bang
                 self.addBangTopic(bangId, topicId)
@@ -63,6 +64,11 @@ class LogicTopic(database):
 
 if __name__ == '__main__':
     logicTopic = LogicTopic()
+    
+    topics = "this is one , this is two, this is three"
+    topicList = topics.split(",")
+    print topicList
+    logicTopic.addBangTopicArray(10, topicList)
     
     
     

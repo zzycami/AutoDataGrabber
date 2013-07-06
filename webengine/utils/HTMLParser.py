@@ -16,6 +16,14 @@ class HTMLParser:
         except:
             print "urlopen exception:" + url
             return False
+    
+    def fetchItems(self, page = 1):
+        pass
+    
+    def fetchBang(self):
+        pass
+    
+    
 
 if __name__ == "__main__":
     parser = HTMLParser()

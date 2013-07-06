@@ -1,8 +1,8 @@
-import ConfigParser
+import ConfigParser, os
 
 # read the config.ini
 config = ConfigParser.ConfigParser()
-config.read("config.ini")
+config.read("%s/../config.ini"%(os.path.split(__file__)[0]))
 host = config.get("database", "DB_HOST")
 user = config.get("database", "DB_USER")
 password = config.get("database", "DB_PASSWORD")
