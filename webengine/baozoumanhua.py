@@ -1,10 +1,10 @@
-# -*- coding: cp936 -*-
+# -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup
 import urllib2, time
 from utils import HTMLParser
 
 
-CATAGORY = "±©×ßÂþ»­"
+CATAGORY = "æš´èµ°æ¼«ç”»"
 ENCODING = "utf-8"
 URL = "http://baozoumanhua.com/groups/1/hottest/week/page/"
 SOURCE = 4
@@ -37,7 +37,7 @@ class baozoumanhua(HTMLParser):
             item["fans"] = 0
             item["bangs"] = 1
             item["is_verified"] = 1
-            item["verified_word"] = u"±©×ßÂþ»­Õ¾µã¿¯µÇµÄÂþ»­"
+            item["verified_word"] = u"æš´èµ°æ¼«ç”»ç«™ç‚¹åˆŠç™»çš„æ¼«ç”»"
             item["status"] = 0
             items.append(item)
         return items
@@ -45,8 +45,8 @@ class baozoumanhua(HTMLParser):
     def fetchBang(self):
         bangObj = {}
         now = time.localtime(time.time())
-        bangObj["title"] = u"±©×ßÂþ»­Ò»ÖÜ×îÈÈÅÅÐÐ°ñ-%d-%d-%d"%(now.tm_year, now.tm_mon, now.tm_mday)
-        bangObj["description"] = u"±©×ßÂþ»­Ò»ÖÜ×îÈÈÅÅÐÐ°ñ-%d-%d-%d"%(now.tm_year, now.tm_mon, now.tm_mday)
+        bangObj["title"] = u"æš´èµ°æ¼«ç”»ä¸€å‘¨æœ€çƒ­æŽ’è¡Œæ¦œ-%d-%d-%d"%(now.tm_year, now.tm_mon, now.tm_mday)
+        bangObj["description"] = u"æš´èµ°æ¼«ç”»ä¸€å‘¨æœ€çƒ­æŽ’è¡Œæ¦œ-%d-%d-%d"%(now.tm_year, now.tm_mon, now.tm_mday)
         # use damingdan admin account
         bangObj["sponsor"] = 1
         bangObj["create_time"] = int(time.time())
