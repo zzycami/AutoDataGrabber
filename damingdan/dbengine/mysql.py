@@ -145,9 +145,11 @@ class mysql:
 
     def checkExist(self, table, condition):
         res = self.fetchOne(table, "count(id) as num", condition)
+        if res == None:
+            return False
         num = res[0]
         if num > 0:
-            return True
+            return self.fetchOne(table, "id", condition)[0]
         else:
             return False
 

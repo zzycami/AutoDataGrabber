@@ -12,9 +12,10 @@ class LogicItem(database):
     # need add the comment image path
     def addItem(self, item, comment):
         # check repeat
-        if self.checkItemExist(item["title"]):
+        itemId = self.checkItemExist(item["title"])
+        if itemId != False:
             print "item %s already exist"%(item["title"])
-            return False
+            return int(itemId)
         
         itemId = database.create(self, self.table, item)
 

@@ -1,17 +1,23 @@
-import config
-EXEC_STR = "from dbengine import %s"%(config.DB_ENGINE)
+import ConfigParser
+
+# read the config.ini
+config = ConfigParser.ConfigParser()
+config.read("config.ini")
+host = config.get("database", "DB_HOST")
+user = config.get("database", "DB_USER")
+password = config.get("database", "DB_PASSWORD")
+name = config.get("database", "DB_NAME")
+port = config.get("database", "DB_PORT")
+dbEngine = config.get("database", "DB_ENGINE")
+EXEC_STR = "from dbengine import %s"%(dbEngine)
 exec EXEC_STR
 
 
 class database:
     def __init__(self):
-        host = config.DB_HOST
-        user = config.DB_USER
-        password = config.DB_PASSWORD
-        name = config.DB_NAME
-        port = config.DB_PORT
         
-        EXEC_STR = "self.db = %s(host, user, password, name, port)"%(config.DB_ENGINE)
+        
+        EXEC_STR = "self.db = %s(host, user, password, name, port)"%(dbEngine)
         exec EXEC_STR
         
 

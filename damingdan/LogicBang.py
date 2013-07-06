@@ -12,9 +12,10 @@ class LogicBang(database):
 
     def addBang(self, bang):
         # check if already have this one
-        if self.checkBangExist(bang["title"]):
+        bangId = self.checkBangExist(bang["title"])
+        if bangId != False:
             print "bang %s already exists"%(bang["title"])
-            return False
+            return int(bangId)
         # create a new bang
         bangId = database.create(self, self.table, bang)
 
