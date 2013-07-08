@@ -5,6 +5,7 @@ Created on 2013-4-7
 '''
 import pika, logging, webImage, send;
 import ConfigParser, os
+from thumb import ImageFactory
 
 ## configuration
 config = ConfigParser.ConfigParser()
@@ -51,13 +52,25 @@ def callback(ch, method, properties, body):
         return;
     
     # After dowload image , then cut the images
+    point = fileName.rfind(".");
+    extension = fileName[point:len(fileName)];
+    
     realPath = UPLOAD_PATH + "/" + fileName;
-    send.sendMessage("image", "width=440,height=0,type=scale,file=%s"%(realPath));
-    send.sendMessage("image", "width=192,height=0,type=scale,file=%s"%(realPath));
-    send.sendMessage("image", "width=50,height=50,type=cut,file=%s"%(realPath));
-    send.sendMessage("image", "width=180,height=180,type=cut,file=%s"%(realPath));
-    send.sendMessage("image", "width=80,height=80,type=cut,file=%s"%(realPath));
-    send.sendMessage("image", "width=232,height=93,type=cut,file=%s"%(realPath));
+    if extension != "gif":
+        imageFactory = ImageFactory("")
+        imageFactory.getStaticThumbByScale(440, realPath,  "_440")
+        imageFactory.getStaticThumbByScale(192, realPath,  "_192")
+        imageFactory.getStaticThumbByCut(50, 50, realPath,  "_50x50")
+        imageFactory.getStaticThumbByCut(180, 180, realPath,  "_180x180")
+        imageFactory.getStaticThumbByCut(80, 80, realPath,  "_80x80")
+        imageFactory.getStaticThumbByCut(232, 93, realPath,  "_232x93")
+    else:
+        send.sendMessage("image", "width=440,height=0,type=scale,file=%s"%(realPath));
+        send.sendMessage("image", "width=192,height=0,type=scale,file=%s"%(realPath));
+        send.sendMessage("image", "width=50,height=50,type=cut,file=%s"%(realPath));
+        send.sendMessage("image", "width=180,height=180,type=cut,file=%s"%(realPath));
+        send.sendMessage("image", "width=80,height=80,type=cut,file=%s"%(realPath));
+        send.sendMessage("image", "width=232,height=93,type=cut,file=%s"%(realPath));
 
 channel.basic_consume(callback, queue=QUEUE_NAME, no_ack=True)
 channel.start_consuming()

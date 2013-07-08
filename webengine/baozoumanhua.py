@@ -6,7 +6,7 @@ from utils import HTMLParser
 
 CATAGORY = "暴走漫画"
 ENCODING = "utf-8"
-URL = "http://baozoumanhua.com/groups/1/hottest/week/page/"
+URL = "http://baozoumanhua.com/groups/1/hottest/8hr/page/"
 SOURCE = 4
 PAGE_SIZE = 5
 
