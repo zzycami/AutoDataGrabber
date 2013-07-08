@@ -19,4 +19,6 @@ class doubanMusic(HTMLParser):
     def fetchItems(self, page = 1):
         print "douban music"
     
-     
+    def fetchBang(self):
+        pass
+    

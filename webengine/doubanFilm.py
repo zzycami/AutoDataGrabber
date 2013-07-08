@@ -19,3 +19,5 @@ class doubanFilm(HTMLParser):
     def fetchItems(self, page = 1):
         print "douban film"
     
+    def fetchBang(self):
+        pass

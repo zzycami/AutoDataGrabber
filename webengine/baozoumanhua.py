@@ -12,6 +12,8 @@ PAGE_SIZE = 5
 
     
 class baozoumanhua(HTMLParser):
+    CATAGORY = CATAGORY
+    PAGE_SIZE = PAGE_SIZE
     def __init__(self):
         HTMLParser.__init__(self)
         
@@ -27,27 +29,30 @@ class baozoumanhua(HTMLParser):
         entryList = self.soup.find("ul", id="entry-list-ul")
         items = []
         for entry in entryList.find_all("li"):
-            item = {}
-            item["foreign_id"] = entry.get("data-id")
-            item["title"] =  entry.get("data-text")
-            item["source"] = SOURCE
-            item["url"] = entry.get("data-url")
-            item["image"] = entry.find("img")["src"]
-            item["creator"] = 1
-            item["create_time"] = int(time.time())
-            item["fans"] = 0
-            item["bangs"] = 1
-            item["is_verified"] = 1
-            item["verified_word"] = u"暴走漫画站点刊登的漫画"
-            item["status"] = 0
-            items.append(item)
+            try:
+                item = {}
+                item["foreign_id"] = entry.get("data-id")
+                item["title"] =  entry.get("data-text")
+                item["source"] = SOURCE
+                item["url"] = entry.get("data-url")
+                item["image"] = entry.find("img")["src"]
+                item["creator"] = 1
+                item["create_time"] = int(time.time())
+                item["fans"] = 0
+                item["bangs"] = 1
+                item["is_verified"] = 1
+                item["verified_word"] = u"暴走漫画站点刊登的漫画"
+                item["status"] = 0
+                items.append(item)  
+            except Exception:
+                pass
         return items
 
     def fetchBang(self):
         bangObj = {}
         now = time.localtime(time.time())
-        bangObj["title"] = u"暴走漫画一周最热排行榜-%d-%d-%d"%(now.tm_year, now.tm_mon, now.tm_mday)
-        bangObj["description"] = u"暴走漫画一周最热排行榜-%d-%d-%d"%(now.tm_year, now.tm_mon, now.tm_mday)
+        bangObj["title"] = "暴走漫画一周最热排行榜-%d-%d-%d"%(now.tm_year, now.tm_mon, now.tm_mday)
+        bangObj["description"] = "暴走漫画一周最热排行榜-%d-%d-%d"%(now.tm_year, now.tm_mon, now.tm_mday)
         # use damingdan admin account
         bangObj["sponsor"] = 1
         bangObj["create_time"] = int(time.time())

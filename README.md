@@ -20,3 +20,7 @@
 
 - MySQLdb: [下载地址](http://sourceforge.net/projects/mysql-python/)
 - BeautifulSoup: [下载地址](http://www.crummy.com/software/BeautifulSoup/#Download)
+
+###4.程序的定时执行
+>使用linux上自带的crontab命令也可以实现在某个时间点自动执行这段程序,但是我想要设置成
+每一个站点的自动执行的时间并不一样.

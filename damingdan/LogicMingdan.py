@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sys, time
 from database import database
 from LogicBang import LogicBang
@@ -34,6 +35,7 @@ class LogicMingdan(database):
         bangStatus = {}
         bangStatus["update_time"] = int(time.time())
         database.update(self, "tbl_bang_stats", bangStatus, condition)
+        
         
 
     def checkNominate(self, bangId, itemId):
